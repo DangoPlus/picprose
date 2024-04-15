@@ -18,13 +18,13 @@ import {
 import unsplash from "./unsplashConfig";
 import { SearchIcon } from "./SearchIcon";
 import { AcmeLogo } from "./AcmeLogo";
-export const LeftResourcePanel = (props) => {
-  const [imageList, setImageList] = React.useState([]);
+export const LeftResourcePanel = (props:any) => {
+  const [imageList, setImageList] = React.useState([] as any);
   const [searchValue, setSearchValue] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(Boolean);
-  const inputRef = React.useRef(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
-  const handleFileChange = (event) => {
+  const handleFileChange = (event:any) => {
     if (event.target.files[0] != null) {
       const file = URL.createObjectURL(event.target.files[0]);
       props.onData({
@@ -51,18 +51,18 @@ export const LeftResourcePanel = (props) => {
       })
       .then((response) => {
         setIsLoading(false);
-        setImageList(response.response.results);
+        setImageList(response.response!.results);
       });
   };
 
-  const onSearchKeydown = (e) => {
+  const onSearchKeydown = (e:any) => {
     if (e.keyCode === 13) {
       searchImages(searchValue);
     }
   };
 
   //
-  const selectImage = (image) => {
+  const selectImage = (image:any) => {
     props.onData({
       url: image.urls.regular,
       name: image.user.name,
@@ -86,23 +86,23 @@ export const LeftResourcePanel = (props) => {
         >
           <NavbarBrand>
             <AcmeLogo />
-            <p className="font-bold text-inherit">PicProse</p>
+            <p className="font-bold text-inherit">PicFlex</p>
           </NavbarBrand>
 
           <NavbarContent justify="end">
             <NavbarItem>
               <Avatar
                 isBordered
-                src="https://i.pravatar.cc/150?u=a04258114e29026302d"
+                src="https://gravatar.com/avatar/36058c814577df660ce234e277d26c7783ccbd7164581ee104da979e8cee292b?size=256"
               />
             </NavbarItem>
           </NavbarContent>
         </Navbar>
       </div>
       <div className="flex-grow overflow-y-scroll overflow-x-hidden justify-center flex flex-wrap scrollbar-thin scrollbar-color-auto">
-        {imageList.map((image) => {
+        {imageList.map((image: any) => {
           return (
-            <img
+            <Image
               src={image.urls.small}
               key={image.id}
               alt={image.alt_description}
@@ -128,7 +128,7 @@ export const LeftResourcePanel = (props) => {
             variant="flat"
             color="primary"
             isIconOnly
-            onClick={() => inputRef.current.click()}
+            onClick={() => {inputRef.current?.click()}}
           >
             <svg
               className="w-5 h-5 text-[#2F6EE7] dark:text-white"
@@ -141,9 +141,9 @@ export const LeftResourcePanel = (props) => {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.3"
                 d="M4 15v2a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-2M12 4v12m0-12 4 4m-4-4L8 8"
               />
             </svg>
